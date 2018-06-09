@@ -1,4 +1,4 @@
-import os
+import os, time
 import tkinter as tk
 from tkinter import filedialog
 from img_cluster_to_txt import ClusterToTxt
@@ -46,10 +46,13 @@ def selected_radio_btn():
 converter = ClusterToTxt()
 def start_convertion(input_path, output_path):
     input_path, output_path = input_path.get(), output_path.get()
+    convertion_string.set("converting...")
+
     if v.get() == "file":
         convert_one_img(converter, input_path, output_path, relative=False)
     else:
         convert_one_folder(converter, input_path, output_path, relative=False)
+    convertion_string.set("Done converting!")
 
 
 
@@ -115,9 +118,12 @@ for i in range(3):
 # button to start the converting
 convert_btn = tk.Button(text="Start converting!", command= lambda: start_convertion(input_path, output_path))
 convert_btn.grid(row=current_row_idx, column=0, sticky="w")
+current_row_idx += 1
 
 # label to change txt to DONE when done converting
-
+convertion_string = tk.StringVar()
+convertion_string.set("")
+convertion_label = tk.Label(textvariable=convertion_string).grid(row=current_row_idx, column=0, sticky="w")
 
 
 
