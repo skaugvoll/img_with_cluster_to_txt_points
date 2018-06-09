@@ -35,6 +35,9 @@ def get_directory_path(button):
 
 def selected_radio_btn():
     input_btn.configure(text="Select input {}".format(v.get()))
+    input_path.set("")
+    output_path.set("")
+
     if v.get() == "file":
         input_btn.configure(command=lambda: get_file_path("input"))
     else:
